@@ -1,55 +1,31 @@
-"""Creating Random No. guess Python Game"""
-import os
-import math as mt
-from random import randrange
-print("="*50)
-print("\tGuess The Number Python Game!")
-print("="*50)
+import random
 
-print("""Select Difficulty Level :-
-1. Easy Mode(8 Guess)
-2. Difficult Mode(5 Guess)""")
-wonGame=False
-# Defining Engine Function that will handle the game!
-def EngineGame(noGuess):
-    global wonGame
-    guessNo = randrange(1, 30)
-    print(f"Random Guess No.(1-30) generated! You have a total of {noGuess} Guesses!")
-    while noGuess!=0:
-        noEntered = int(input("Enter your Guess :- "))
-        if mt.fabs(noEntered-guessNo) == 0:
-            guessLeft = noGuess-1
-            noGuess=0
-            wonGame=True
-        elif mt.fabs(noEntered-guessNo) <= 5:
-            print("\nAnswer is not right but you are near to the Answer. :)")
-            noGuess -= 1
-            print(f"You have only {noGuess} Guesses Left!\n")
-        elif mt.fabs(noEntered-guessNo) <= 10:
-            print("\nHmmm, This is not looking right! :(")
-            noGuess -= 1
-            print(f"You have only {noGuess} Guesses Left!\n")
-        elif mt.fabs(noEntered-guessNo) > 10:
-            print("\nNo, your guess is not right! :(")
-            noGuess -= 1
-            print(f"You have only {noGuess} Guesses Left!\n")
-        else :
-            pass
-    else :
-        if wonGame==True:
-            print("\nCongratulations! You have successfully guessed the right No. :)")
-            print(f"You have found the right Answer with {guessLeft} Guesses Left!\n")
-        else :
-            print("\nSorry! You have lost the Game! ")
-            print(f"Right Answer is {guessNo}.\n")
-# Interacting with user in first Screen.
-ch = int(input("Select Difficulty Level (1 or 2) => "))
-if ch==1:
-    print("You Have Chosen Easy Mode!")
-    EngineGame(8)
-elif ch==2 :
-    print("Well Done! You are a Brave Human ! You have Chosen Difficult Mode!")
-    EngineGame(5)
-else :
-    print("Please Choose a valid Option(1 or 2) !")
-os.system('pause')
+
+def guess_the_number():
+    # Generate a random number between 1 and 100
+    secret_number = random.randint(1, 100)
+
+    attempts = 0
+
+    print("Welcome to the Number Guessing Game!")
+    print("I have selected a random number between 1 and 100. Try to guess it.")
+
+    while True:
+        # Get user's guess
+        user_guess = int(input("Enter your guess: "))
+
+        # Increment the number of attempts
+        attempts += 1
+
+        # Check if the guess is correct
+        if user_guess == secret_number:
+            print(f"Congratulations! You guessed the correct number {secret_number} in {attempts} attempts.")
+            break
+        elif user_guess < secret_number:
+            print("Too low! Try again.")
+        else:
+            print("Too high! Try again.")
+
+
+if __name__ == "__main__":
+    guess_the_number()
